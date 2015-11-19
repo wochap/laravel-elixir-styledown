@@ -1,0 +1,25 @@
+{
+  "name": "laravel-elixir-styledown",
+  "version": "0.0.1",
+  "description": "Laravel Elixir Styledown Extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wochap/laravel-elixir-styledown.git"
+  },
+  "keywords": [
+    "gulp",
+    "laravel",
+    "elixir",
+    "styledown"
+  ],
+  "author": "Gean Bonifacio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wochap/laravel-elixir-styledown/issues"
+  },
+  "homepage": "https://github.com/wochap/laravel-elixir-styledown#readme"
+}
