@@ -1,6 +1,6 @@
 ## Laravel Elixir Styledown
 
-Laravel Elixir Styledown with (styledown)[https://github.com/st44100/gulp-styledown]
+Laravel Elixir Styledown with [styledown](https://github.com/st44100/gulp-styledown)
 
 ## Install
 ```sh
