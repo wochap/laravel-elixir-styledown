@@ -32,11 +32,11 @@ elixir.extend('styledown', function (options) {
 
     new Task('styledown', function() {
 		return gulp.src(gulp_src)
-			.pipe(styldown(styledown_options))
-			.pipe.dest(gulp_dest)
+			.pipe(styledown(styledown_options))
+			.pipe(gulp.dest(gulp_dest))
 			.pipe(notify({
-				title: 'Styledown completed',
-				message: '<%= file.relative %> have been compiled.',
+				title: 'Laravel Elixir',
+				message: 'Styledown generated!',
 				icon: __dirname + '/../laravel-elixir/icons/pass.png'
 			}));
     })
