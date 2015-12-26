@@ -1,10 +1,9 @@
-var elixir          = require('laravel-elixir');
-var gulp            = require('gulp');
-var styledown 		= require('gulp-styledown');
-var notify          = require('gulp-notify');
-var _               = require('underscore');
+var gulp = require('gulp')
+var styledown = require('gulp-styledown')
+var Elixir = require('laravel-elixir')
+var _ = require('underscore')
 
-var Task = elixir.Task;
+var config = Elixir.config
 
 /*
  |----------------------------------------------------------------
@@ -16,30 +15,41 @@ var Task = elixir.Task;
  |
  */
 
-elixir.extend('styledown', function (options) {
+Elixir.extend('styledown', function (src, output, options) {
+  config.styledown = {
+    folder: 'styledown',
+    outputFolder: 'styledown'
+  }
 
-    options = _.extend({
-		src     : '/path/to/styledown/*.md',
-		config  : '/path/to/config.md', // Path to config.md
-		filename: 'output.html', // Path to output html
-		dest    : 'paht/to/'
-    }, options);
+  var paths = prepGulpPaths(src, output)
 
-    var gulp_src = options.src;
-    var gulp_dest = options.dest;
+  options = _.extend({
+    src: paths.src.path, // Path to src folder
+    config: config.get('assets.styledown.folder') + '/config.md', // Path to config.md
+    filename: paths.output.name, // output filename
+    dest: paths.output.baseDir // Path to output folder
+  }, options)
 
-	var styledown_options = options;
+  new Elixir.Task('styledown', function () {
+    this.log(paths.src, paths.output) // Log src and output
 
-    new Task('styledown', function() {
-		return gulp.src(gulp_src)
-			.pipe(styledown(styledown_options))
-			.pipe(gulp.dest(gulp_dest))
-			.pipe(notify({
-				title: 'Laravel Elixir',
-				message: 'Styledown generated!',
-				icon: __dirname + '/../laravel-elixir/icons/pass.png'
-			}));
-    })
-    .watch([ options.src ]);
+    return gulp.src(options.src)
+      .pipe(styledown(options))
+      .pipe(gulp.dest(options.dest))
+      .pipe(new Elixir.Notification('Styledown Compiled!'))
+  })
+  .watch(config.get('assets.styledown.folder') + '/**/*.md')
+})
 
-});
+/**
+ * Prep the Gulp src and output paths.
+ *
+ * @param  {string|array} src
+ * @param  {string|null}  output
+ * @return {object}
+ */
+var prepGulpPaths = function (src, output) {
+  return new Elixir.GulpPaths()
+    .src(src, config.get('assets.styledown.folder'))
+    .output(output || config.get('public.styledown.outputFolder'), 'styledown.html')
+}
