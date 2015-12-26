@@ -24,7 +24,7 @@ Elixir.extend('styledown', function (src, output, options) {
   var paths = prepGulpPaths(src, output)
 
   options = _.extend({
-    src: paths.src.path, // Path to src folder
+    src: paths.src.path, // Path to src files
     config: config.get('assets.styledown.folder') + '/config.md', // Path to config.md
     filename: paths.output.name, // output filename
     dest: paths.output.baseDir // Path to output folder
