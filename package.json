@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/wochap/laravel-elixir-styledown#readme",
   "dependencies": {
-    "gulp-notify": "^2.2.0",
     "gulp-styledown": "0.0.2",
     "underscore": "^1.8.3"
   }
