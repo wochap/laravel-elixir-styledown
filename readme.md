@@ -1,15 +1,15 @@
 ## Laravel Elixir Styledown
 
-Laravel Elixir Styledown with [styledown](https://github.com/st44100/gulp-styledown)
+This Laravel Elixir extension allows you to compile [styledown](https://github.com/styledown/styledown).
 
-## Install
+## Installation
+First, pull in the extension through NPM.
+
 ```sh
-$ npm install laravel-elixir-styledown --save-dev
+$ npm install --save-dev laravel-elixir-styledown
 ```
 
-## Usage
-
-Example:
+Next, add it to your Elixir-enhanced Gulpfile, like so:
 
 ```javascript
 var elixir = require('laravel-elixir');
@@ -17,25 +17,46 @@ var elixir = require('laravel-elixir');
 require('laravel-elixir-styledown');
 
 elixir(function(mix) {
-   mix.styledown(options);
+  mix.styledown('components/button.md');
 });
 ```
 
-## Options
-- src : Path to styledown.md
-- config : Path to config.md
-- filename : Path to output html
-- dest : Path to gulp dest
+Don't forget create a [config.md](https://github.com/styledown/styledown#step-2-configure) and that's it! You're all set to go!
 
-Other options are pass to [styledown](https://github.com/styledown/styledown).
+## Usage
 
-##Default Options
+Assuming you write...
+
+```javascript
+elixir(function(mix) {
+  mix.styledown('components/button.md');
+});
+```
+
+...this will take `resources/assets/styledown/config.md` as configuration and compile your `resources/assets/styledown/components/button.md` file to `./public/styledown/styledown.html`.
+
+If you'd like to set a different output directory, you may pass a second argument to the `styledown()` method, like so:
+
+```javascript
+mix.styledown('components/button.md', 'public/docs/button.html');
+
+```
+
+Finally, if you want to override the Styledown plugin options, you may pass an object as the third argument.
+
+```javascript
+mix.styledown('components/button.md', 'public/docs/button.html', {});
+
+// See options at: https://www.npmjs.com/package/gulp-styledown#options
+```
+
+## Default Options
 
 ```javascript
 {
-	src     : '/path/to/styledown/*.md',
-	config  : '/path/to/config.md', // Path to config.md
-	filename: 'output.html', // Path to output html
-	dest    : 'paht/to/'
+  src: 'resources/assets/styledown', // Path to src files
+  config: 'resources/assets/styledown/config.md', // Path to config.md
+  filename: 'styledown.html', // output filename
+  dest: './public/styledown' // Path to output folder
 }
 ```
