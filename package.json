@@ -1,6 +1,6 @@
 {
   "name": "laravel-elixir-styledown",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Laravel Elixir Styledown Extension",
   "main": "index.js",
   "scripts": {
